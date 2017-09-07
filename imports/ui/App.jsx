@@ -15,7 +15,6 @@ class App extends Component {
   }
 }
 
-console.log(Meteor.subscribe('test'));
 export default createContainer(() => {
   return {
     currentUser: Meteor.user()
