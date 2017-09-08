@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import { createContainer } from 'meteor/react-meteor-data';
+import React, { Component } from "react";
+import { createContainer } from "meteor/react-meteor-data";
 
-import AccountsUIWrapper from './AccountsUIWrapper';
-import SteamInfo from './SteamInfo';
+import Routing from "./Routing";
+import AccountsUIWrapper from "./AccountsUIWrapper";
+import SteamInfo from "./SteamInfo";
 
 class App extends Component {
   render() {
     return (
       <div>
         <AccountsUIWrapper />
-        {this.props.currentUser ? <SteamInfo steamId={this.props.currentUser.profile.id} /> : <h1>Not Logged In </h1>}
+        <Routing />
       </div>
     );
   }

@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "lan-party",
   "private": true,
   "scripts": {
     "start": "meteor run"
@@ -13,6 +13,21 @@
     "react": "^15.6.1",
     "react-addons-pure-render-mixin": "^15.6.0",
     "react-dom": "^15.6.1",
-    "react-komposer": "^2.0.0"
-  }
+    "react-komposer": "^2.0.0",
+    "react-router-dom": "^4.2.2"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulmathis/lan-party.git"
+  },
+  "author": "Paul Mathis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paulmathis/lan-party/issues"
+  },
+  "homepage": "https://github.com/paulmathis/lan-party#readme",
+  "description": ""
 }

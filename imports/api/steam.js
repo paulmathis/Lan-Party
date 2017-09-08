@@ -1,12 +1,27 @@
-Meteor.methods({
-  // The method expects a valid IPv4 address
-  'steam.GetOwnedGames'(steamId) {
-    const apiKey = Meteor.settings.steamApiKey;
+if (Meteor.server) {
+  Meteor.methods({
+    // Get a list of steam games owned for given steamid
+    "steam.GetOwnedGames"(steamId) {
+      const apiKey = Meteor.settings.steamApiKey;
 
-    const response = HTTP.get(
-      `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${apiKey}&steamid=${steamId}&format=json&include_appinfo=1`
-    ).data.response.games;
+      const response = HTTP.get(
+        `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${apiKey}&steamid=${steamId}&format=json&include_appinfo=1`
+      ).data.response.games;
 
-    return response;
-  }
-});
+      return response;
+    }
+  });
+}
+
+// Wrap method.call in promise function
+// Takes in method name and steam ID
+function getSteam(method, steamId) {
+  return new Promise(resolve => {
+    Meteor.call(`steam.${method}`, steamId, (err, res) => {
+      console.log(err);
+      resolve(res);
+    });
+  });
+}
+
+export default getSteam;

@@ -1,13 +1,7 @@
-import React, { Component } from 'react';
-import { createContainer } from 'meteor/react-meteor-data';
+import React, { Component } from "react";
+import { createContainer } from "meteor/react-meteor-data";
 
-function getSteam(steamId) {
-  return new Promise(function(resolve) {
-    Meteor.call('steam.GetOwnedGames', steamId, (err, res) => {
-      resolve(res);
-    });
-  });
-}
+import getSteam from "../api/steam.js";
 
 class SteamInfo extends Component {
   constructor(props) {
@@ -20,7 +14,7 @@ class SteamInfo extends Component {
   }
 
   componentDidMount() {
-    getSteam(this.props.steamId).then(res => {
+    getSteam("GetOwnedGames", this.props.steamId).then(res => {
       this.setState(
         {
           gamesList: res
