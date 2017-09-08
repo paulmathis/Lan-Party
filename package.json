@@ -10,6 +10,7 @@
     "classnames": "^2.2.5",
     "dotenv": "^4.0.0",
     "meteor-node-stubs": "~0.2.4",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-addons-pure-render-mixin": "^15.6.0",
     "react-dom": "^15.6.1",
@@ -18,7 +19,17 @@
   },
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "@meteorjs/eslint-config-meteor": "^1.0.5",
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.6.1",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-import-resolver-meteor": "^0.4.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-meteor": "^4.1.4",
+    "eslint-plugin-react": "^7.3.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/paulmathis/lan-party.git"

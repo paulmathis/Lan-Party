@@ -1,23 +1,35 @@
-import React, { Component } from "react";
-import { createContainer } from "meteor/react-meteor-data";
+import React from 'react';
+import { createContainer } from 'meteor/react-meteor-data';
+import Loader from 'react-loader';
+import { Meteor } from 'meteor/meteor';
+import PropTypes from 'prop-types';
 
-import Routing from "./Routing";
-import AccountsUIWrapper from "./AccountsUIWrapper";
-import SteamInfo from "./SteamInfo";
+import Routing from './Routing';
+import AccountsUIWrapper from './AccountsUIWrapper';
+// import SteamInfo from './SteamInfo';
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <AccountsUIWrapper />
-        <Routing />
-      </div>
-    );
-  }
-}
+const App = props => (
+  <div>
+    <Loader loaded={!props.loggingIn} length={0} scale={2} radius={20} lines={9} width={14}>
+      <AccountsUIWrapper />
+      <Routing currentUser={props.currentUser} />
+    </Loader>
+  </div>
+);
 
-export default createContainer(() => {
-  return {
-    currentUser: Meteor.user()
-  };
-}, App);
+App.defaultProps = {
+  currentUser: undefined,
+};
+
+App.propTypes = {
+  loggingIn: PropTypes.bool.isRequired,
+  currentUser: PropTypes.objectOf(PropTypes.any),
+};
+
+export default createContainer(
+  () => ({
+    currentUser: Meteor.user(),
+    loggingIn: Meteor.loggingIn(),
+  }),
+  App,
+);

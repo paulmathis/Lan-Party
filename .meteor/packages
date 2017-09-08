@@ -24,3 +24,5 @@ service-configuration
 accounts-ui
 react-meteor-data
 http
+check
+aldeed:simple-schema

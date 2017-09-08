@@ -1,0 +1,19 @@
+{
+  "plugins": ["meteor"],
+  "extends": ["plugin:meteor/recommended", "@meteorjs/eslint-config-meteor"],
+  "rules": {
+    "linebreak-style": 0,
+    "jsx-a11y/href-no-hash": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "meteor": {
+        "extensions": [".jsx", ".js"]
+      }
+    }
+  },
+  "globals": {
+    "ServiceConfiguration": false,
+    "SimpleSchema": false
+  }
+}

@@ -6,8 +6,8 @@ Meteor.startup(() => {
     {
       $set: {
         loginStyle: 'redirect',
-        timeout: 10000
-      }
-    }
+        timeout: 10000,
+      },
+    },
   );
 });
