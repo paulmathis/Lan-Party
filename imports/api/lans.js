@@ -5,8 +5,9 @@ const Lans = new Mongo.Collection('lans');
 Lans.schema = new SimpleSchema({
   name: { type: String },
   datetime: { type: Date },
-  steamId: { type: String },
-  userId: { type: String },
+  userId: { type: [String] },
 });
 
-export default Lans;
+Lans.attachSchema(Lans.schema);
+
+export { Lans as default };

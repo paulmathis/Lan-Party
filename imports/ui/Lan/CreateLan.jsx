@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { createContainer } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
+
+import Lans from '../../api/lans.js';
 
 class CreateLan extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       name: '',
       date: '',
@@ -23,7 +26,12 @@ class CreateLan extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    console.log(evt.target);
+    const datetime = new Date(`${this.state.date} ${this.state.time}`);
+    Lans.insert({
+      name: this.state.name,
+      datetime,
+      userId: [this.props.currentUser._id],
+    });
   }
 
   render() {
@@ -49,6 +57,13 @@ class CreateLan extends Component {
   }
 }
 
-CreateLan.propTypes = {};
+CreateLan.propTypes = {
+  currentUser: PropTypes.objectOf(PropTypes.any).isRequired,
+};
 
-export default CreateLan;
+export default createContainer(
+  () => ({
+    currentUser: Meteor.user(),
+  }),
+  CreateLan,
+);
