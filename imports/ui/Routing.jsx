@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import Splash from './Splash/Splash';
 import Lan from './Lan/Lan';
 import CreateLan from './Lan/CreateLan';
+import LanPage from './Lan/LanPage';
+
+const fourohfour = () => <h1>404</h1>;
 
 // Redirect to home page if there is not a user logged in
 const PrivateRoute = ({ component: Component, currentUser, ...rest }) => (
@@ -31,6 +34,8 @@ const Routing = props => (
         <Route exact path="/" render={() => (props.currentUser ? <Redirect to="/lan" /> : <Splash />)} />
         <PrivateRoute exact path="/lan" component={Lan} currentUser={props.currentUser} />
         <PrivateRoute exacct path="/lan/create" component={CreateLan} currentUser={props.currentUser} />
+        <PrivateRoute path="/lan/id/:id" component={LanPage} currentUser={props.currentUser} />
+        <Route component={fourohfour} />
       </Switch>
     </div>
   </Router>
