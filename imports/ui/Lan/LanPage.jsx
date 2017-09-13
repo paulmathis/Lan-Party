@@ -6,14 +6,12 @@ import { Meteor } from 'meteor/meteor';
 import Lans from '../../api/lans.js';
 
 class LanPage extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentWillMount() {
-    console.log(this.props);
-    if (!this.props.lan.userId.includes(this.props.currentUser._id)) {
-      console.log('test');
-      this.props.history.push('/lan');
+    const { lan, currentUser, history } = this.props;
+
+    // If the lan doens't exist or the user is not a member of the lan redirect bcak to lan home
+    if (lan === undefined || !lan.userId.includes(currentUser._id)) {
+      history.push('/lan');
     }
   }
   render() {
@@ -21,7 +19,14 @@ class LanPage extends Component {
   }
 }
 
-LanPage.propTypes = {};
+LanPage.defaultProps = {
+  lan: undefined,
+};
+LanPage.propTypes = {
+  lan: PropTypes.objectOf(PropTypes.any),
+  currentUser: PropTypes.objectOf(PropTypes.any).isRequired,
+  history: PropTypes.arrayOf(PropTypes.any).isRequired,
+};
 
 export default createContainer(
   props => ({

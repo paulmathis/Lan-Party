@@ -8,22 +8,23 @@ import { Meteor } from 'meteor/meteor';
 import Lans from '../../api/lans.js';
 
 const LanList = (props) => {
-  console.log(props);
-  return (
-    <ul>
-      {props.lans.map(lan => (
-        <li key={lan._id}>
-          <Link to={`/lan/id/${lan._id}`}>
-            <h1>{lan.name}</h1>
-          </Link>
-          <h2>{moment(lan.datetime).format()}</h2>
-        </li>
-      ))}
-    </ul>
-  );
+  const lans = props.lans.map(lan => (
+    <li key={lan._id}>
+      <Link to={`/lan/id/${lan._id}`}>
+        <h1>{lan.name}</h1>
+      </Link>
+      <h2>{moment(lan.datetime).format()}</h2>
+    </li>
+  ));
+  return <ul>{lans}</ul>;
 };
 
-LanList.propTypes = {};
+LanList.defaultProps = {
+  lans: [],
+};
+LanList.propTypes = {
+  lans: PropTypes.arrayOf(PropTypes.object),
+};
 
 export default createContainer(
   () => ({
