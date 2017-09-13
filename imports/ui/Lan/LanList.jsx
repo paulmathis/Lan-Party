@@ -7,15 +7,18 @@ import { Meteor } from 'meteor/meteor';
 
 import Lans from '../../api/lans.js';
 
+const LanItem = ({ lan }) => (
+  <li>
+    <Link to={`/lan/id/${lan._id}`}>
+      <h1>{lan.name}</h1>
+    </Link>
+    <h2>{moment(lan.datetime).format()}</h2>
+  </li>
+);
+
 const LanList = (props) => {
-  const lans = props.lans.map(lan => (
-    <li key={lan._id}>
-      <Link to={`/lan/id/${lan._id}`}>
-        <h1>{lan.name}</h1>
-      </Link>
-      <h2>{moment(lan.datetime).format()}</h2>
-    </li>
-  ));
+  // Map through all lans
+  const lans = props.lans.map(lan => <LanItem key={lan._id} lan={lan} />);
   return <ul>{lans}</ul>;
 };
 

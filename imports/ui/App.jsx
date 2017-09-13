@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 
 import Routing from './Routing';
 import AccountsUIWrapper from './AccountsUIWrapper';
-// import SteamInfo from './SteamInfo';
 
+// Wraps all pages in a loader while it logs you in
 const App = props => (
   <div>
     <Loader loaded={!props.loggingIn} length={0} scale={2} radius={20} lines={9} width={14}>
