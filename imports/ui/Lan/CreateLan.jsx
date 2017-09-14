@@ -35,22 +35,41 @@ class CreateLan extends Component {
   }
 
   render() {
+    // keep submit button disabled until all 3 fields have input
+    const { name, date, time } = this.state;
+    const disabled = name === '' || date === '' || time === '';
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="createLanName">
-            Lan Name<input onChange={this.handleChange} type="text" name="name" id="createLanName" />
+            Lan Name<input
+              onChange={this.handleChange}
+              type="text"
+              name="name"
+              id="createLanName"
+            />
           </label>
 
           <label htmlFor="createLanDate">
-            Date<input onChange={this.handleChange} type="date" name="date" id="createLanDate" />
+            Date<input
+              onChange={this.handleChange}
+              type="date"
+              name="date"
+              id="createLanDate"
+            />
           </label>
 
           <label htmlFor="createLanTime">
-            Time<input onChange={this.handleChange} type="time" name="time" id="createLanTime" />
+            Time<input
+              onChange={this.handleChange}
+              type="time"
+              name="time"
+              id="createLanTime"
+            />
           </label>
 
-          <input type="submit" value="Submit" />
+          <input type="submit" disabled={disabled} value="Submit" />
         </form>
       </div>
     );
