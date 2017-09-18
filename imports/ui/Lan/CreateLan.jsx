@@ -13,7 +13,6 @@ class CreateLan extends Component {
       date: '',
       time: '',
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -26,11 +25,13 @@ class CreateLan extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    const datetime = new Date(`${this.state.date} ${this.state.time}`);
+    const { date, time, name } = this.state;
+    const datetime = new Date(`${date} ${time}`);
     Lans.insert({
-      name: this.state.name,
+      name,
       datetime,
-      userId: [this.props.currentUser._id],
+      steamId: [this.props.currentUser.profile.id],
+      owner: this.props.currentUser.profile.id,
     });
   }
 
@@ -43,30 +44,15 @@ class CreateLan extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="createLanName">
-            Lan Name<input
-              onChange={this.handleChange}
-              type="text"
-              name="name"
-              id="createLanName"
-            />
+            Lan Name<input onChange={this.handleChange} type="text" name="name" id="createLanName" />
           </label>
 
           <label htmlFor="createLanDate">
-            Date<input
-              onChange={this.handleChange}
-              type="date"
-              name="date"
-              id="createLanDate"
-            />
+            Date<input onChange={this.handleChange} type="date" name="date" id="createLanDate" />
           </label>
 
           <label htmlFor="createLanTime">
-            Time<input
-              onChange={this.handleChange}
-              type="time"
-              name="time"
-              id="createLanTime"
-            />
+            Time<input onChange={this.handleChange} type="time" name="time" id="createLanTime" />
           </label>
 
           <input type="submit" disabled={disabled} value="Submit" />

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Splash from './Splash/Splash';
 import Lan from './Lan/Lan';
 import CreateLan from './Lan/CreateLan';
-import LanPage from './Lan/LanPage';
+import LanPage from './Lan/LanPage/LanPage';
 import PrivateRoute from './PrivateRotue';
 
 const fourohfour = () => <h1>404</h1>;

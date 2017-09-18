@@ -31,7 +31,7 @@ LanList.propTypes = {
 
 export default createContainer(
   () => ({
-    lans: Lans.find({ userId: Meteor.user()._id }).fetch(),
+    lans: Lans.find({ steamId: Meteor.user().profile.id }).fetch(),
   }),
   LanList,
 );
