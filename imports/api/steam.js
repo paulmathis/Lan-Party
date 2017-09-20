@@ -7,7 +7,7 @@ if (Meteor.server) {
   Meteor.methods({
     // Get a list of steam games owned for given steamid
     'steam.GetOwnedGames'(steamId) {
-      check(steamId, 'string');
+      check(steamId, String);
 
       const response = HTTP.get(
         `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${apiKey}&steamid=${steamId}&format=json&include_appinfo=1`,
@@ -16,14 +16,18 @@ if (Meteor.server) {
       return response;
     },
     'steam.GetPlayerSummaries'(steamId) {
-      console.log(typeof steamId);
-      // check(steamId, 'string');
+      console.log(steamId);
+      check(steamId, [String]);
+
+      // Create string to pass to GetPlayersSummaries
+      // TODO Bring inside of GetPlayerSummaries directly
+      // const idString = this.props.lan.steamId.join(', ');
 
       const response = HTTP.get(
         `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${apiKey}&steamids=${steamId}&format=json`,
       );
 
-      return response;
+      return response.data.response.players;
     },
   });
 }
@@ -33,7 +37,6 @@ if (Meteor.server) {
 function getSteam(method, steamId) {
   return new Promise((resolve) => {
     Meteor.call(`steam.${method}`, steamId, (err, res) => {
-      console.log(err);
       resolve(res);
     });
   });

@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 import Member from './Member';
 
 const MemberList = (props) => {
-  const members = props.memberIds.map(memberId => <Member key={memberId} memberId={memberId} />);
+  const members = props.membersSteamInfo.map(member => (
+    <Member key={member.steamid} memberId={member.steamid} alias={member.personaname} />
+  ));
 
   return <ul>{members}</ul>;
 };
 
 MemberList.propTypes = {
-  memberIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  membersSteamInfo: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default MemberList;
