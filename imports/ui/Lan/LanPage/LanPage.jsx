@@ -6,6 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import Lans from '../../../api/lans.js';
 import MemberList from './MemberList';
 import getSteam from '../../../api/steam.js';
+import Invite from './Invite';
 
 class LanPage extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class LanPage extends Component {
 
     this.state = {
       membersSteamInfo: [],
+      friends: [],
     };
   }
 
@@ -27,16 +29,27 @@ class LanPage extends Component {
   componentDidMount() {
     // Get the steam info for all the members of the lan
     getSteam('GetPlayerSummaries', this.props.lan.steamId).then((res) => {
+      console.log(res);
       this.setState({
         membersSteamInfo: res,
+      });
+    });
+
+    // Get current users friends list
+    getSteam('GetFriendList', this.props.currentUser.profile.id).then((res) => {
+      console.log('yep', res);
+      this.setState({
+        friends: res,
       });
     });
   }
 
   render() {
+    console.log(this.state);
     return (
       <div>
         <MemberList membersSteamInfo={this.state.membersSteamInfo} />
+        <Invite friends={this.state.friends} />
       </div>
     );
   }

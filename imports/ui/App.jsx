@@ -3,6 +3,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import Loader from 'react-loader';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
+import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
 import Routing from './Routing';
 import AccountsUIWrapper from './AccountsUIWrapper';

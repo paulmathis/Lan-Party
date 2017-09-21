@@ -13,21 +13,30 @@ if (Meteor.server) {
         `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${apiKey}&steamid=${steamId}&format=json&include_appinfo=1`,
       ).data.response.games;
 
+      // TODO: Have it only pass on necessary information
       return response;
     },
     'steam.GetPlayerSummaries'(steamId) {
-      console.log(steamId);
       check(steamId, [String]);
-
-      // Create string to pass to GetPlayersSummaries
-      // TODO Bring inside of GetPlayerSummaries directly
-      // const idString = this.props.lan.steamId.join(', ');
 
       const response = HTTP.get(
         `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${apiKey}&steamids=${steamId}&format=json`,
       );
 
+      console.log(JSON.stringify(response.data));
+      // TODO: Have it only pass on necessary information
       return response.data.response.players;
+    },
+    'steam.GetFriendList'(steamId) {
+      check(steamId, String);
+
+      const response = HTTP.get(
+        `http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=${apiKey}&steamid=${steamId}&relationship=friend`,
+      ).data.friendslist.friends;
+
+      // Returns just the steam ID's
+      const friendsList = response.map(friend => friend.steamid);
+      return friendsList;
     },
   });
 }
