@@ -24,20 +24,17 @@ class LanPage extends Component {
     if (lan === undefined || !lan.steamId.includes(currentUser.profile.id)) {
       history.push('/lan');
     }
-  }
 
-  componentDidMount() {
     // Get the steam info for all the members of the lan
     getSteam('GetPlayerSummaries', this.props.lan.steamId).then((res) => {
-      console.log(res);
       this.setState({
         membersSteamInfo: res,
+        friends: res,
       });
     });
 
     // Get current users friends list
     getSteam('GetFriendList', this.props.currentUser.profile.id).then((res) => {
-      console.log('yep', res);
       this.setState({
         friends: res,
       });
@@ -45,7 +42,6 @@ class LanPage extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div>
         <MemberList membersSteamInfo={this.state.membersSteamInfo} />

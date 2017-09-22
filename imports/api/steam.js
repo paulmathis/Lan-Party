@@ -21,22 +21,23 @@ if (Meteor.server) {
 
       const response = HTTP.get(
         `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${apiKey}&steamids=${steamId}&format=json`,
-      );
+      ).data.response.players;
 
-      console.log(JSON.stringify(response.data));
       // TODO: Have it only pass on necessary information
-      return response.data.response.players;
+      return response;
     },
     'steam.GetFriendList'(steamId) {
       check(steamId, String);
 
-      const response = HTTP.get(
+      const firstResponse = HTTP.get(
         `http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=${apiKey}&steamid=${steamId}&relationship=friend`,
       ).data.friendslist.friends;
 
       // Returns just the steam ID's
-      const friendsList = response.map(friend => friend.steamid);
-      return friendsList;
+      const friendsSteamIds = firstResponse.map(friend => friend.steamid);
+
+      // Call for full player summaries to return
+      return Meteor.call('steam.GetPlayerSummaries', friendsSteamIds);
     },
   });
 }
