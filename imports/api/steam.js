@@ -23,8 +23,14 @@ if (Meteor.server) {
         `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${apiKey}&steamids=${steamId}&format=json`,
       ).data.response.players;
 
-      // TODO: Have it only pass on necessary information
-      return response;
+      // Returns simplified info
+      const simpleInfo = response.map(user => ({
+        avatar: user.avatar,
+        personaname: user.personaname,
+        steamid: user.steamid,
+      }));
+
+      return simpleInfo;
     },
     'steam.GetFriendList'(steamId) {
       check(steamId, String);

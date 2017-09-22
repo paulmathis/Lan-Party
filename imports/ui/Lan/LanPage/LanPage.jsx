@@ -29,7 +29,6 @@ class LanPage extends Component {
     getSteam('GetPlayerSummaries', this.props.lan.steamId).then((res) => {
       this.setState({
         membersSteamInfo: res,
-        friends: res,
       });
     });
 
@@ -42,10 +41,12 @@ class LanPage extends Component {
   }
 
   render() {
+    // Only render friends if thiers more than 0
+    const renderFriends = this.state.friends.length > 0;
     return (
       <div>
         <MemberList membersSteamInfo={this.state.membersSteamInfo} />
-        <Invite friends={this.state.friends} />
+        {renderFriends ? <Invite friends={this.state.friends} /> : ''}
       </div>
     );
   }
@@ -54,6 +55,7 @@ class LanPage extends Component {
 LanPage.defaultProps = {
   lan: undefined,
 };
+
 LanPage.propTypes = {
   lan: PropTypes.objectOf(PropTypes.any),
   currentUser: PropTypes.objectOf(PropTypes.any).isRequired,
