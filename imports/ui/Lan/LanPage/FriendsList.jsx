@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import object from 'lodash/fp/object';
 
 import Friend from './Friend';
 
@@ -21,6 +22,10 @@ class FriendsList extends Component {
     this.setState({
       inviteList: tempList,
     });
+
+    // If there's a selection pass this status back to the invite button
+    const inviteable = object.values(tempList).includes(true);
+    this.props.toggleInviteButton(inviteable);
   }
 
   render() {
@@ -46,6 +51,7 @@ class FriendsList extends Component {
 
 FriendsList.propTypes = {
   friends: PropTypes.arrayOf(PropTypes.object).isRequired,
+  toggleInviteButton: PropTypes.func.isRequired,
 };
 
 export default FriendsList;

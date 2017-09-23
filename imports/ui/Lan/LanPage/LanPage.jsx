@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 
-import Lans from '../../../api/lans.js';
+import Lans from '../../../api/Lans.js';
 import MemberList from './MemberList';
 import getSteam from '../../../api/steam.js';
 import Invite from './Invite';
@@ -46,7 +46,7 @@ class LanPage extends Component {
     return (
       <div>
         <MemberList membersSteamInfo={this.state.membersSteamInfo} />
-        {renderFriends ? <Invite friends={this.state.friends} /> : ''}
+        {renderFriends ? <Invite lanId={this.props.lan._id} friends={this.state.friends} /> : ''}
       </div>
     );
   }

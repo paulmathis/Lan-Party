@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 
-import Lans from '../../api/lans.js';
+import Lans from '../../api/Lans.js';
 
 const LanItem = ({ lan }) => (
   <li>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 
-import Lans from '../../api/lans.js';
+import Lans from '../../api/Lans.js';
 
 class CreateLan extends Component {
   constructor(props) {
