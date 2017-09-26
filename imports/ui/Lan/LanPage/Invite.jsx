@@ -21,7 +21,6 @@ class Invite extends Component {
   }
 
   render() {
-    console.log(props.lan);
     return (
       <div>
         <FriendsList toggleInviteButton={this.toggleInviteButton} friends={this.props.friends} />
